@@ -25,7 +25,7 @@ public class FractionPrinterTest {
 		System.setOut(printer);
 		Fraction f = new Fraction(7, 8);
 		FractionPrinter.println(f);
-		Assert.assertEquals("7/8" + eol, console.toString());
+		Assert.assertEquals("7" + eol + "-" + eol + "8" + eol, console.toString());
 	}
 
 }
