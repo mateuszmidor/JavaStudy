@@ -2,11 +2,11 @@ package com.mateuszmidor;
 
 import java.util.StringTokenizer;
 
-public class CoolCalc implements Calculator {
+public class CoolCalc {
 
 	// "2/5 + 1/5 * 4/3 - 2/3"
 	// presumption: there is at least one fraction in equation
-	public Fraction calc(String equation) {
+	public static Fraction calc(String equation) {
 		String cleanEquation = cleanTheEquation(equation);
 
 		StringTokenizer st = new StringTokenizer(cleanEquation, "+-*", true);
@@ -21,7 +21,8 @@ public class CoolCalc implements Calculator {
 		return result;
 	}
 
-	private Fraction doSimpleEquation(Fraction a, Fraction b, String operator) {
+	private static Fraction doSimpleEquation(Fraction a, Fraction b,
+			String operator) {
 
 		switch (operator) {
 		case "+":
@@ -33,7 +34,7 @@ public class CoolCalc implements Calculator {
 		}
 	}
 
-	private String cleanTheEquation(String equation) {
+	private static String cleanTheEquation(String equation) {
 		return equation.replaceAll("\\s", "");
 	}
 
