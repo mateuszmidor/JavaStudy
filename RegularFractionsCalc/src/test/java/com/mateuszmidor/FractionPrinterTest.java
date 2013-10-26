@@ -3,7 +3,6 @@ package com.mateuszmidor;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -18,10 +17,12 @@ public class FractionPrinterTest {
 	public static void setup() {
 		console = new ByteArrayOutputStream();
 		printer = new PrintStream(console);
-		System.setOut(printer);
+		
 	}
+
 	@Test
 	public void testPrint() {
+		System.setOut(printer);
 		Fraction f = new Fraction(7, 8);
 		FractionPrinter.println(f);
 		Assert.assertEquals("7/8" + eol, console.toString());

@@ -9,10 +9,9 @@ public class FractionManipulatorTest {
 	@Test
 	public void testAdd() {
 		Fraction a = new Fraction(1, 2);
-		Fraction b = new Fraction(5, 6);
+		Fraction b = new Fraction(2, 2);
 		Fraction sum = FractionManipulator.add(a, b);
-		Assert.assertEquals(6, sum.numerator);
-		Assert.assertEquals(8, sum.denominator);
+		Assert.assertEquals(1.5f, (float)sum.numerator / sum.denominator, 0.01);
 	}
 
 }
