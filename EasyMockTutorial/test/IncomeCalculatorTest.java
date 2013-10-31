@@ -3,7 +3,6 @@ import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -21,7 +20,6 @@ public class IncomeCalculatorTest {
 	public void setUp() throws Exception {
 		calc = new IncomeCalculator();
 		calcMethod = createNiceMock(ICalcMethod.class);
-
 	}
 
 	@Test
@@ -34,12 +32,6 @@ public class IncomeCalculatorTest {
 		replay(calcMethod);
 
 		calc.setCalcMethod(calcMethod);
-		try {
-			calc.calc();
-			fail("Exception did not occur");
-		} catch (RuntimeException e) {
-
-		}
 		calc.setPosition(Position.BOSS);
 		assertEquals(70000.0, calc.calc(), 0);
 		assertEquals(70000.0, calc.calc(), 0);
@@ -50,12 +42,14 @@ public class IncomeCalculatorTest {
 		verify(calcMethod);
 	}
 
+	// no calc method - should throw
 	@Test(expected = RuntimeException.class)
 	public void testNoCalcMethod() {
 		calc.setPosition(Position.SURFER);
 		calc.calc();
 	}
 
+	// no position - should throw
 	@Test(expected = RuntimeException.class)
 	public void testNoPosition() {
 		expect(calcMethod.calc(Position.BOSS)).andReturn(70000.0);
