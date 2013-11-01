@@ -1,4 +1,4 @@
-package com.mateuszmidor.HttpStudy;
+package com.mateuszmidor;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

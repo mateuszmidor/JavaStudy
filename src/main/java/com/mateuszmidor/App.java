@@ -1,7 +1,7 @@
 package com.mateuszmidor;
 
 /**
- * Hello world!
+ * SImple HTTP server, based on http://www.jmarshall.com/easy/http/
  *
  */
 public class App 
