@@ -10,7 +10,7 @@ import java.util.StringTokenizer;
 import com.google.common.base.Joiner;
 import com.google.common.collect.ComparisonChain;
 
-public class EchoSorted {
+public class App {
 	private static class StringLengthComparator implements Comparator<String> {
 
 		@Override
