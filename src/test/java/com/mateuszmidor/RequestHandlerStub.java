@@ -3,7 +3,7 @@ package com.mateuszmidor;
 import java.io.BufferedReader;
 import java.io.PrintWriter;
 
-public class RequestHandlerStub extends RequestHandler {
+public class RequestHandlerStub extends DebugRequestHandler {
 	private String response;
 
 	public RequestHandlerStub(String response) {
