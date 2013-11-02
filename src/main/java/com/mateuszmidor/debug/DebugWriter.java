@@ -1,4 +1,4 @@
-package com.mateuszmidor;
+package com.mateuszmidor.debug;
 
 import java.io.PrintWriter;
 

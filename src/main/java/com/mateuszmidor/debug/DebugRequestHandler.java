@@ -1,4 +1,4 @@
-package com.mateuszmidor;
+package com.mateuszmidor.debug;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -6,6 +6,10 @@ import java.io.PrintWriter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.mateuszmidor.HttpRequest;
+import com.mateuszmidor.HttpRequestParser;
+import com.mateuszmidor.RequestHandler;
 
 public class DebugRequestHandler implements RequestHandler {
 

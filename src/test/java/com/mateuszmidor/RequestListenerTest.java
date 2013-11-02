@@ -61,7 +61,7 @@ public class RequestListenerTest {
 	}
 
 	@Test
-	public void testListen() {
+	public void testListener() {
 		// socket mock simulates incoming request
 		ServerSocket socket = prepareSocketReturningRequest(HTTP_REQUEST_STRING);
 
