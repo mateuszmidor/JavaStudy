@@ -3,6 +3,7 @@ package com.mateuszmidor;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DateFormat;
 import java.util.Date;
 
 import org.slf4j.Logger;
@@ -15,8 +16,7 @@ class DebugWriter {
 	}
 
 	private void debug(String s) {
-		System.err.println(s);
-		System.err.flush();
+		System.out.println(s);
 	}
 	
 	
@@ -49,38 +49,54 @@ class DebugWriter {
 	
 }
 public class RequestHandler {
+	private static final String HTTP_200_OK = "HTTP/1.0 200 OK";
 	private static final String HTTP_404_NOT_FOUND = "HTTP/1.0 404 Not Found";
 	
 	private static final Logger log = LoggerFactory
 			.getLogger(RequestHandler.class);
 
 	public void handleRequest(BufferedReader in, PrintWriter raw_out) {
+		String HTML = "Serwer mowi: dizen dobry!";
+//		String HTML = "<html><body><h1>Happy New Millennium!</h1></body></html>";
 
 		debugRequest(in);
-		DebugWriter out = new DebugWriter(raw_out);
 		
-		reply404NotFound(out);
-		// PrintStream out = System.out;
-//		String HTML = "<html> <body> <h1>Happy New Millennium!</h1></body></html>";
-//		out.println("HTTP/1.0 200 OK");
-//		out.println("Date: " + new Date().toGMTString());
-//		out.println("Content-Type: text/html");
-//		out.format("Content-Length: %d", HTML.length() + 1);
-//		out.println();
-//		out.println(HTML);
+		System.out.println("--------Server odpowiada");
+		DebugWriter out = new DebugWriter(raw_out);
+		reply200WithContent(out, HTML);
+		//reply404NotFound(out);
+	}
+
+	private void reply200WithContent(DebugWriter out, String content) {
+		// kolejność nagłówków MA ZNACZENIE!!!
+		// zła kolejność zaskutkuje wyświetleniem pustej strony
+		String currentGmtTime = getCurrentGmtDateTime();
+		out.println(HTTP_200_OK);
+		out.println("Server: MidorServer/0.1");
+		out.println("Accept-Ranges: bytes");
+		out.format("Content-Length: %d", content.length());
+		out.println("Connection: close");
+		out.println("Content-Type: text/html");
+		
 		out.println();
-		out.flush();
+		out.println(content);
+			
+	}
+
+	private String getCurrentGmtDateTime() {
+		return DateFormat.getInstance().format(new Date());
 	}
 
 	private void reply404NotFound(DebugWriter out) {
 		out.println(HTTP_404_NOT_FOUND);
+		out.println();
 	}
 
 	private void debugRequest(BufferedReader in) {
+		System.out.println("--------Nowy request");
 		String s;
 		try {
 			while ((s = in.readLine()).length() > 1) {
-				//log.info(s);
 				System.out.println(s);
 				System.out.flush();
 			}

@@ -19,7 +19,7 @@ public class App
     	
    
     	while (true) {
-    		System.err.println( "Czekam na nowe zapytanie! " + DateFormat.getInstance().format(new Date()) );
+    		System.out.println( "------ Server czeka na zapytaine! " + DateFormat.getInstance().format(new Date()) );
     		listener.listen(socket, handler);
     	}
     }
