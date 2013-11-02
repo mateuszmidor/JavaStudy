@@ -20,7 +20,7 @@ public class RequestListener {
 			BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 			
 			handler.handleRequest(in, out);
-			
+			clientSocket.close();
 		} catch (IOException e) {
 			logger.error(e.getMessage());
 		}
