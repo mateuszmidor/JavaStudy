@@ -9,5 +9,6 @@
     </head>
     <body>
         <h1>Hello World update!</h1>
+        <h2>Run this with Jetty from mvn jetty:run, then localhost:8080</h2>
     </body>
 </html>
