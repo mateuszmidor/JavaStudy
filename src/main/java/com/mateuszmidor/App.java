@@ -11,5 +11,9 @@ public class App
     	new BasicGenericPrinter();
     	new GenericNumberListPrinter();
     	new ComparableMaxMethod();
+    	new GenericCopier();
+    	new ObjectFactory();
+    	new AssignGenericToNongenericList();
+    	new IllegalTypePassing();
     }
 }
