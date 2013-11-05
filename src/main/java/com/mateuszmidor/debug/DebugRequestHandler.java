@@ -40,7 +40,7 @@ public class DebugRequestHandler implements RequestHandler {
 
 		System.out.println("-------Server responds");
 
-		// silulate 404 not found
+		// simulate 404 not found
 		if (request.requestedResource.equals("/404")) {
 			reply404NotFound(debugOut, HTML_NOT_FOUND_RESPONSE);
 		} 
