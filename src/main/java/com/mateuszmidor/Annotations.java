@@ -47,12 +47,13 @@ public class Annotations {
 		
 		System.out.println();
 	}
+	
+	private boolean isMyTestMethod(Method m) {
+		return m.isAnnotationPresent(MyTest.class);
+	}
 
 	private void printMethodName(Method m) {
 		System.out.println(m.getName());
 	}
 
-	private boolean isMyTestMethod(Method m) {
-		return m.isAnnotationPresent(MyTest.class);
-	}
 }

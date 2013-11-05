@@ -12,11 +12,12 @@ class Loudy {
 
 public class NewInstanceWithConstructor {
 
+	@SuppressWarnings("unused")
 	public NewInstanceWithConstructor() {
 		try {
 			Class<?> class_ = Loudy.class;
-			Constructor<?> c = class_.getConstructor(null);
-			Object o = c.newInstance(null);
+			Constructor<?> c = class_.getConstructor();
+			Object o = c.newInstance();
 			
 		} catch (NoSuchMethodException | SecurityException e1) {
 			// TODO Auto-generated catch block

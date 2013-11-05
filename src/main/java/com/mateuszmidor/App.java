@@ -7,10 +7,6 @@ package com.mateuszmidor;
 
 public class App {
 
-	public static void print(String s) {
-		System.out.println(s);
-	}
-
 	public static void main(String[] args) {
 
 		new Annotations();
