@@ -1,0 +1,3 @@
+This is a tutorial about using Eclipse and the GlassFish v3 Java application server to implement Java EE 6 applications. I will show how to use different Eclipse project types for different purposes, will show how to do manual tests and how to implement automatic unit tests. We will not create a complete application, but more a vertical slice through an application. The idea is to just touch all relevant areas, not to finish a project.
+
+The tutorial assumes the existence of a relational database, and it concentrates on the Java application used as a backend. Using JSF or another server-based GUI framework is definitely out of scope.
