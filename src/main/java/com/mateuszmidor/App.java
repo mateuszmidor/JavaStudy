@@ -7,8 +7,8 @@ package com.mateuszmidor;
 public class App {
 	public static void main(String[] args) {
 
-		Dictionary englishDictionary = Dictionaries.fromFile("english.dic");
-		String originalText = TextFile.asSingleLine("EnglishText.txt");
+		Dictionary englishDictionary = Dictionaries.fromFile(new TextFileReader("english.dic"));
+		String originalText = new TextFileReader("EnglishText.txt").asSingleLine();
 		SpellChecker spellChecker = new SpellChecker(englishDictionary);
 		String markedErrorsText = spellChecker.markErrors(originalText);
 		

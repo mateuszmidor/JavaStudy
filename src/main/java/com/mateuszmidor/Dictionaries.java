@@ -4,8 +4,8 @@ import java.util.List;
 
 public class Dictionaries {
 
-	public static Dictionary fromFile(String filename) {
-		List<String> words = TextFile.asMultiLine(filename);
+	public static Dictionary fromFile(TextFileReader reader) {
+		List<String> words = reader.asMultiLine();
 		return new Dictionary(words);
 	}
 
