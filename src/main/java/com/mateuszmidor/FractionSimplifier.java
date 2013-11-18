@@ -6,7 +6,7 @@ public class FractionSimplifier {
 	}
 
 	public static Fraction simplify(Fraction f) {
-		for (int i = f.denominator; i > 1; i--) {
+		for (int i = f.denominator; i >= 2; i--) {
 			if (dividesBy(f.numerator, i) && dividesBy(f.denominator, i)) {
 				return new Fraction(f.numerator / i, f.denominator / i);
 			}

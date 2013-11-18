@@ -17,13 +17,30 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.8.1</version>
+			<version>4.10</version>
 		</dependency>
 
 	</dependencies>
 
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>cobertura-maven-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<formats>
+						<format>html</format>
+						<format>xml</format>
+					</formats>
+					<instrumentation>
+						<excludes> <!-- calkiem pomin pliki -->
+							<exclude>com/mateuszmidor/Ap*</exclude>
+						</excludes>
+					</instrumentation>
+				</configuration>
+
+			</plugin>
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
 				<configuration>
@@ -61,7 +78,31 @@
 					<target>1.7</target>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.pitest</groupId>
+				<artifactId>pitest-maven</artifactId>
+				<version>0.31</version>
+				<configuration>
+					<targetClasses>
+						<param>com.mateuszmidor*</param>
+					</targetClasses>
+					<targetTests>
+						<param>com.mateuszmidor*</param>
+					</targetTests>
+					<excludedClasses>
+						<param>com.mateuszmidor.App</param>
+					</excludedClasses>
+				</configuration>
+			</plugin>
 		</plugins>
-
 	</build>
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>cobertura-maven-plugin</artifactId>
+				<version>2.6</version>
+			</plugin>
+		</plugins>
+	</reporting>
 </project>
