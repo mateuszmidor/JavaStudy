@@ -7,6 +7,11 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
+interface ICalcMethod {
+	double calc(Position position);
+}
+
+
 interface INumberProvider {
 	public int provide();
 }
