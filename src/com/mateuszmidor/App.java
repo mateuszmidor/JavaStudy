@@ -15,6 +15,7 @@ public class App {
 		new CaseFormatExample();
 		new IterablesExample();
 		new BiMapExample();
+		new MultiSetExample();
 		new PreconditionsExample();
 	}
 

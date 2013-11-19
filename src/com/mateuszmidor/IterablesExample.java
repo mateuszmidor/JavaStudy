@@ -21,7 +21,6 @@ public class IterablesExample {
 		System.out.println("add '10' to third");
 		third.add(10);
 		System.out.println(all);
-
 		System.out.println();
 
 	}
