@@ -11,6 +11,7 @@ public class App {
 		new FileOperationsExample(); // copy, move/rename, delete file lub directory
 		new ReadAllLinesExample(); // Files.readAllLines
 		new DirContentListerExample(); // zawartosc danego katalogu
+		new FileVisitorExample(); // trawersowanie drzewa katalogow, PatchMatcher, MIME
 	}
 
 }
