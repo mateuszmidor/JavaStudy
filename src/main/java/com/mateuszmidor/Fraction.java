@@ -1,16 +1,29 @@
 package com.mateuszmidor;
 
 public class Fraction {
-	public int numerator;
-	public int denominator;
-	public Fraction(int nominator, int denominator) {
+	private int numerator;
+	private int denominator;
+
+	public int getDenominator() {
+		return denominator;
+	}
+	public void setDenominator(int denominator) {
+		this.denominator = denominator;
+	}
+	public int getNumerator() {
+		return numerator;
+	}
+	public void setNumerator(int numerator) {
+		this.numerator = numerator;
+	}
+	public Fraction(int numerator, int denominator) {
 		super();
-		this.numerator = nominator;
+		this.numerator = numerator;
 		this.denominator = denominator;
 	}
 	public Fraction() {
-		numerator = 0;
-		denominator = 0;
+		this.numerator = 0;
+		this.denominator = 0;
 	}
-	
+
 }

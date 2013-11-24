@@ -3,17 +3,20 @@ package com.mateuszmidor;
 import java.util.StringTokenizer;
 
 public class CoolCalc {
+	private CoolCalc() {
+	}
 
-	// "2/5 + 1/5 * 4/3 - 2/3"
+	// "2/5 + 1/5 + 4/3 - 2/3"
 	// presumption: there is at least one fraction in equation
 	public static Fraction calc(String equation) {
 		String cleanEquation = cleanTheEquation(equation);
 
-		StringTokenizer st = new StringTokenizer(cleanEquation, "+-*", true);
+		StringTokenizer st = new StringTokenizer(cleanEquation, "+-", true);
 
 		Fraction result = FractionParser.parse(st.nextToken());
 		while (st.hasMoreTokens()) {
-			String operator = st.nextToken(); // equation operator
+			 // equation operator
+			String operator = st.nextToken();
 			Fraction fraction = FractionParser.parse(st.nextToken());
 
 			result = doSimpleEquation(result, fraction, operator);
@@ -25,12 +28,12 @@ public class CoolCalc {
 			String operator) {
 
 		switch (operator) {
-		case "+":
-			return FractionManipulator.add(a, b);
-		case "-":
-			return FractionManipulator.sub(a, b);
-		default:
-			throw new RuntimeException("Nieznana operacja: " + operator);
+			case "+" :
+				return FractionManipulator.add(a, b);
+			case "-" :
+				return FractionManipulator.sub(a, b);
+			default :
+				throw new UnsupportedOperationException("Nieznana operacja: " + operator);
 		}
 	}
 

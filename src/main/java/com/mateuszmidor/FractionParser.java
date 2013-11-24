@@ -1,6 +1,8 @@
 package com.mateuszmidor;
 
 public class FractionParser {
+	private FractionParser() {
+	}
 
 	public static Fraction parse(String token) {
 		String[] numeratorDenominator = token.split("/");

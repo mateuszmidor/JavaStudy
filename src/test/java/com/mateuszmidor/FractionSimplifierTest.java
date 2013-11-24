@@ -10,23 +10,23 @@ public class FractionSimplifierTest {
 	public void testSimplify1() {
 		Fraction complex = new Fraction(2, 1);
 		Fraction simplified = FractionSimplifier.simplify(complex);
-		Assert.assertEquals(2, simplified.numerator);
-		Assert.assertEquals(1, simplified.denominator);
+		Assert.assertEquals(2, simplified.getNumerator());
+		Assert.assertEquals(1, simplified.getDenominator());
 	}
 	
 	@Test
 	public void testSimplify2() {
 		Fraction complex = new Fraction(22, 33);
 		Fraction simplified = FractionSimplifier.simplify(complex);
-		Assert.assertEquals(2, simplified.numerator);
-		Assert.assertEquals(3, simplified.denominator);
+		Assert.assertEquals(2, simplified.getNumerator());
+		Assert.assertEquals(3, simplified.getDenominator());
 	}
 
 	@Test
 	public void testSimplify3() {
 		Fraction complex = new Fraction(2, 4);
 		Fraction simplified = FractionSimplifier.simplify(complex);
-		Assert.assertEquals(1, simplified.numerator);
-		Assert.assertEquals(2, simplified.denominator);
+		Assert.assertEquals(1, simplified.getNumerator());
+		Assert.assertEquals(2, simplified.getDenominator());
 	}
 }

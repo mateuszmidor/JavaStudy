@@ -7,10 +7,12 @@ import java.util.Scanner;
  * 
  */
 public class App {
+	private App() {
+	}
+
 	public static void main(String[] args) {
 		printWelcomeMessageWithInstructions();
-		
-		
+
 		String s = readln();
 		while (!shouldExit(s)) {
 			if (isCorrectEquation(s)) {
@@ -20,7 +22,7 @@ public class App {
 			}
 			s = readln();
 		}
-		
+
 		printByeByeMessage();
 	}
 
@@ -30,12 +32,12 @@ public class App {
 
 	private static String readln() {
 		@SuppressWarnings("resource")
-		Scanner s = new Scanner(System.in);
+		Scanner s = new Scanner(System.in, "UTF-8");
 		return s.nextLine();
 	}
 
 	private static boolean shouldExit(String s) {
-		return s.equals("q");
+		return "q".equals(s);
 	}
 
 	private static void printByeByeMessage() {

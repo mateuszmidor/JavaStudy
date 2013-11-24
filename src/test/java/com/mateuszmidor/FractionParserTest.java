@@ -9,8 +9,8 @@ public class FractionParserTest {
 	@Test
 	public void test() {
 		Fraction f = FractionParser.parse("15/16");
-		Assert.assertEquals(15, f.numerator);
-		Assert.assertEquals(16, f.denominator);
+		Assert.assertEquals(15, f.getNumerator());
+		Assert.assertEquals(16, f.getDenominator());
 	}
 
 }

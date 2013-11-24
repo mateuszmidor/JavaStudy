@@ -1,19 +1,20 @@
 package com.mateuszmidor;
 
 public class FractionManipulator {
+	private FractionManipulator() {
+	}
 
 	private static int getCommonDelimiter(Fraction a, Fraction b) {
-		int commonDenominator = a.denominator * b.denominator;
-		return commonDenominator;
+		return a.getDenominator() * b.getDenominator();
 	}
 
 	public static Fraction add(Fraction a, Fraction b) {
 		Fraction result = new Fraction();
 
 		int commonDenominator = getCommonDelimiter(a, b);
-		result.numerator = a.numerator * b.denominator + b.numerator
-				* a.denominator;
-		result.denominator = commonDenominator;
+		result.setNumerator(a.getNumerator() * b.getDenominator()
+				+ b.getNumerator() * a.getDenominator());
+		result.setDenominator(commonDenominator);
 		return result;
 	}
 
@@ -21,9 +22,9 @@ public class FractionManipulator {
 		Fraction result = new Fraction();
 
 		int commonDenominator = getCommonDelimiter(a, b);
-		result.numerator = a.numerator * b.denominator - b.numerator
-				* a.denominator;
-		result.denominator = commonDenominator;
+		result.setNumerator(a.getNumerator() * b.getDenominator()
+				- b.getNumerator() * a.getDenominator());
+		result.setDenominator(commonDenominator);
 		return result;
 	}
 }
