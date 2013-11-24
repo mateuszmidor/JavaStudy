@@ -2,15 +2,18 @@ package com.mateuszmidor.debug;
 
 import java.io.PrintWriter;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 class DebugWriter {
 	private PrintWriter writer;
-
-	public DebugWriter(PrintWriter raw_out) {
-		writer = raw_out;
+	private static final Logger LOGGER = LoggerFactory.getLogger(DebugWriter.class);
+	public DebugWriter(PrintWriter outWriter) {
+		writer = outWriter;
 	}
 
 	private void debug(String s) {
-		System.out.println(s);
+		LOGGER.debug(s);
 	}
 
 	public PrintWriter format(String format, Object... args) {

@@ -13,6 +13,8 @@ import com.mateuszmidor.RequestHandler;
 
 public class DebugRequestHandler implements RequestHandler {
 
+	private static final String URI_404 = "/404";
+	
 	private static final String HEADER_CONTENT_TYPE_TEXT_HTML = "Content-Type: text/html; charset=utf-8";
 	private static final String HEADER_CONTENT_LENGTH = "Content-Length: %d";
 	private static final String HEADER_SERVER_MIDORSERVER = "Server: MidorServer/0.1";
@@ -21,7 +23,7 @@ public class DebugRequestHandler implements RequestHandler {
 	private static final String HTML_OK_RESPONSE_WITH_CONTENT = "<html><body><h1>Welcome to MidorServer 0.1</h1> <h2>The requested resource is %s</h2></body></html>";
 	private static final String HTML_NOT_FOUND_RESPONSE = "<html><body><h1>Welcome to MidorServer 0.1</h1> <h2>Error 404: Not found</h2></body></html>";
 
-	private static final Logger log = LoggerFactory
+	private static final Logger LOGGER = LoggerFactory
 			.getLogger(DebugRequestHandler.class);
 
 	// parse the request from 'in' and respond with a message to 'out'
@@ -38,18 +40,21 @@ public class DebugRequestHandler implements RequestHandler {
 		// debugging purposes
 		DebugWriter debugOut = new DebugWriter(out);
 
-		System.out.println("-------Server responds");
+		LOGGER.debug("-------Server responds");
 
 		// simulate 404 not found
-		if (request.requestedResource.equals("/404")) {
+		if (isAskingFor404(request)) {
 			reply404NotFound(debugOut, HTML_NOT_FOUND_RESPONSE);
-		} 
-		else {
+		} else {
 
 			String output = String.format(HTML_OK_RESPONSE_WITH_CONTENT,
 					request.requestedResource);
 			reply200OK(debugOut, output);
 		}
+	}
+
+	private boolean isAskingFor404(HttpRequest request) {
+		return request.requestedResource.equals(URI_404);
 	}
 
 	private void reply200OK(DebugWriter out, String content) {
@@ -79,14 +84,15 @@ public class DebugRequestHandler implements RequestHandler {
 	// simply print out all the http request information
 	private void debugRequest(BufferedReader in) throws IOException {
 		in.mark(99999);
-		System.out.println("-------New request incoming");
+		LOGGER.debug("-------New request incoming");
 		String s;
+		
 		try {
 			while ((s = in.readLine()).length() > 1) {
-				System.out.println(s);
+				LOGGER.debug(s);
 			}
 		} catch (IOException e) {
-			log.error(e.getMessage());
+			LOGGER.error(e.getMessage(), e);
 		}
 		in.reset();
 	}

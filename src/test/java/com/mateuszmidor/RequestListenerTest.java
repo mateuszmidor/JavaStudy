@@ -1,8 +1,6 @@
 package com.mateuszmidor;
 
-import static org.easymock.EasyMock.createNiceMock;
 import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.replay;
 import static org.junit.Assert.fail;
 
 import java.io.ByteArrayInputStream;
@@ -17,6 +15,7 @@ import java.nio.charset.Charset;
 import junit.framework.Assert;
 
 import org.easymock.EasyMock;
+import org.easymock.IMocksControl;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,10 +24,30 @@ public class RequestListenerTest {
 	private static final String HTTP_REQUEST_STRING = "GET /path/to/file/index.html HTTP/1.0";
 	private RequestListener listener;
 	private ByteArrayOutputStream responseStorage;
+	private IMocksControl mockControl;
 
 	@Before
 	public void setUp() throws Exception {
 		listener = new RequestListener();
+		mockControl = EasyMock.createControl();
+	}
+
+	@After
+	public void tearDown() throws Exception {
+		listener = null;
+		mockControl = null;
+	}
+
+	private ServerSocket prepareSocketThrowingIOException() {
+		ServerSocket serverSocket = mockControl.createMock(ServerSocket.class);
+		try {
+
+			expect(serverSocket.accept()).andThrow(new IOException());
+		} catch (IOException e1) {
+			fail();
+		}
+		mockControl.replay();
+		return serverSocket;
 	}
 
 	private ServerSocket prepareSocketReturningRequest(String request) {
@@ -40,24 +59,19 @@ public class RequestListenerTest {
 			InputStream inputStream = new ByteArrayInputStream(
 					request.getBytes(Charset.defaultCharset()));
 
-			Socket clientSocket = createNiceMock(Socket.class);
-			expect(clientSocket.getInputStream()).andReturn(inputStream);
+			Socket clientSocket = mockControl.createMock(Socket.class);
 			expect(clientSocket.getOutputStream()).andReturn(outputStream);
-			replay(clientSocket);
+			expect(clientSocket.getInputStream()).andReturn(inputStream);
+			clientSocket.close();
 
-			serverSocket = createNiceMock(ServerSocket.class);
+			serverSocket = mockControl.createMock(ServerSocket.class);
 			expect(serverSocket.accept()).andReturn(clientSocket);
-			replay(serverSocket);
+			mockControl.replay();
 
 		} catch (IOException e) {
 			fail(e.getMessage());
 		}
 		return serverSocket;
-	}
-
-	@After
-	public void tearDown() throws Exception {
-		listener = null;
 	}
 
 	@Test
@@ -72,7 +86,20 @@ public class RequestListenerTest {
 
 		// see if everything went ok
 		Assert.assertEquals(HTTP_REQUEST_STRING, responseStorage.toString());
-		EasyMock.verify(socket);
+		mockControl.verify();
+	}
+
+	@Test
+	public void testListenerIOException() {
+		// socket mock throwing IOException on accept()
+		ServerSocket socket = prepareSocketThrowingIOException();
+
+		// stubbed handler copies request to response
+		RequestHandlerStub handler = new RequestHandlerStub("");
+
+		// catch exception here
+		listener.listen(socket, handler);
+		mockControl.verify();
 	}
 
 }

@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 
 import com.mateuszmidor.debug.DebugRequestHandler;
 
+
 public class RequestHandlerStub extends DebugRequestHandler {
 	private String response;
 
