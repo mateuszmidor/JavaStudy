@@ -46,8 +46,7 @@ class Producer implements Runnable {
 
 	@Override
 	public void run() {
-		// iterator cykliczny - krêci sie w kó³ko
-		Iterator<String> iterator = Iterators.cycle("Mares eat oats",
+		Iterator<String> iterator = Iterators.forArray("Mares eat oats",
 				"Does eat oats", "Little lambs eat ivy",
 				"A kid will eat ivy too");
 
@@ -92,15 +91,24 @@ public class WaitNotifyExample {
 
 	public WaitNotifyExample() {
 
+		System.out.println("Wait-notify example.");
 		// Drop box pozwala wrzucaæ i wyci¹gaæ tekst
 		// w sposób synchronizowany
 		DropBox drop = new DropBox();
 		
 		// producent wrzuca tekst co jakiœ czas
-		(new Thread(new Producer(drop), "producer")).start();
+		Thread producer = new Thread(new Producer(drop), "producer");
+		producer.start();
 		
 		// konsument pobiera i wyœwietla tekst co jakiœ czas
-		(new Thread(new Consumer(drop), "consumer")).start();
-
+		Thread consumer = new Thread(new Consumer(drop), "consumer");
+		consumer.start();
+		try {
+			// czekamy a¿ konsumer zje wszystkie produkty
+			consumer.join();
+		} catch (InterruptedException e) {
+		}
+		
+		System.out.println();
 	}
 }
