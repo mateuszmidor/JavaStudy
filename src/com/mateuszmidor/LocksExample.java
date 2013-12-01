@@ -1,8 +1,14 @@
 package com.mateuszmidor;
 
+import java.util.List;
 import java.util.Random;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+
+import com.google.common.collect.Lists;
 
 public class LocksExample {
 
@@ -58,7 +64,7 @@ public class LocksExample {
 		}
 	}
 
-	static class BowLoop implements Runnable {
+	static class BowLoop implements Callable<Object> {
 		private Friend bower;
 		private Friend bowee;
 
@@ -67,7 +73,8 @@ public class LocksExample {
 			this.bowee = bowee;
 		}
 
-		public void run() {
+		@Override
+		public Object call() throws Exception {
 			Random random = new Random();
 			for (int i = 0; i < 10; i++) {
 				try {
@@ -76,6 +83,7 @@ public class LocksExample {
 				}
 				bowee.bow(bower);
 			}
+			return null;
 		}
 	}
 
@@ -84,19 +92,22 @@ public class LocksExample {
 		
 		final Friend alphonse = new Friend("Alphonse");
 		final Friend gaston = new Friend("Gaston");
-		Thread friend1 = new Thread(new BowLoop(alphonse, gaston));
-		friend1.start();
 		
-		Thread friend2 = new Thread(new BowLoop(gaston, alphonse));
-		friend2.start();
+		// przygotowujemy pule dwoch w¹tków
+		ExecutorService es = Executors.newFixedThreadPool(2);
 		
-		// czekamy, a¿ sie ch³opaki znudz¹ uk³onami
+		// przygotwujemy listê zadañ
+		List<BowLoop> tasks = Lists.newArrayList(new BowLoop(alphonse, gaston), 
+				new BowLoop(gaston, alphonse));
+		
 		try {
-			friend1.join();
-			friend2.join();
+			// odpalamy zadania i czekamy, a¿ zostan¹ zakoñczone
+			es.invokeAll(tasks);
 		} catch (InterruptedException e) {
 		}
 		
+		// zabijamy pule w¹tków
+		es.shutdown();
 		System.out.println();
 	}
 }
