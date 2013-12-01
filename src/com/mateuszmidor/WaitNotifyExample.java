@@ -75,8 +75,9 @@ class Consumer implements Runnable {
 	@Override
 	public void run() {
 		Random random = new Random();
-		for (String message = db.get(); !message.equals("DONE"); 
-				message = db.get()) {
+		for (String message = db.get(); 
+				!message.equals("DONE"); message = db.get()) {
+			
 			System.out.format("MESSAGE RECEIVED: %s%n", message);
 			try {
 				Thread.sleep(random.nextInt(5000));
@@ -91,8 +92,14 @@ public class WaitNotifyExample {
 
 	public WaitNotifyExample() {
 
+		// Drop box pozwala wrzucaæ i wyci¹gaæ tekst
+		// w sposób synchronizowany
 		DropBox drop = new DropBox();
+		
+		// producent wrzuca tekst co jakiœ czas
 		(new Thread(new Producer(drop), "producer")).start();
+		
+		// konsument pobiera i wyœwietla tekst co jakiœ czas
 		(new Thread(new Consumer(drop), "consumer")).start();
 
 	}
