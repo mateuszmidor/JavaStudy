@@ -11,22 +11,19 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class RequestListener {
-	private static final Logger LOGGER = LoggerFactory
-			.getLogger(RequestListener.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(RequestListener.class);
 
-	public void listen(ServerSocket socket, RequestHandler handler) {
-		try {
-			Socket clientSocket = socket.accept();
-			PrintWriter out = new PrintWriter(clientSocket.getOutputStream(),
-					true);
-			BufferedReader in = new BufferedReader(new InputStreamReader(
-					clientSocket.getInputStream()));
+    public void listen(ServerSocket socket, RequestHandler handler) {
+        try {
+            Socket clientSocket = socket.accept();
+            PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
+            BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
-			handler.handleRequest(in, out);
+            handler.handleRequest(in, out);
 
-			clientSocket.close();
-		} catch (IOException e) {
-			LOGGER.error(e.getMessage(), e);
-		}
-	}
+            clientSocket.close();
+        } catch (IOException e) {
+            LOGGER.error(e.getMessage(), e);
+        }
+    }
 }
