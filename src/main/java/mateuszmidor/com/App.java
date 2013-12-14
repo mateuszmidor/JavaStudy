@@ -12,6 +12,7 @@ public class App {
         new PostMethodeExample();
         new TcpStreamsExample();
         new UdpDatagramsExample();
+        new CookiesExample();
     }
 
 }

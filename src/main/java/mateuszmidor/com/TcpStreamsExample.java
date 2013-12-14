@@ -99,7 +99,7 @@ public class TcpStreamsExample {
     }
 
     public TcpStreamsExample() {
-        System.out.println("Tcp streams example:");
+        System.out.println("Tcp streams example");
 
         Thread server = new Server(3333, "Server");
         Thread client = new Client(3333, "Client");

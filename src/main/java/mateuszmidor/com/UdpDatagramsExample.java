@@ -94,11 +94,22 @@ public class UdpDatagramsExample {
     public UdpDatagramsExample() {
         System.out.println("Udp packets example");
 
-        // start the server
+        // create and start the server
         new Server(4444, "Udp server").start();
+
         
-        // start client - ask for time
-        new Client(4444).start();
+        // create the client
+        Thread client = new Client(4444);
+        
+        // start the client
+        client.start();
+        
+        // wait for client to finish
+        try {
+            client.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         
         System.out.println();
     }
