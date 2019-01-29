@@ -10,7 +10,6 @@ public class FlightRequestDeserializer {
         try {
             return mapper.readValue(json, FlightRequest.class);
         } catch (IOException e) {
-            Log.e(e);
             return FlightRequest.NULL;
         }
     }

@@ -7,15 +7,12 @@ import mm.api.TextFileReader;
 
 /**
  * Hello world!
- *
  */
-public class App 
-{
-    public static void main( String[] args )
-    {
+public class App {
+    public static void main(String[] args) {
         final String JSON_FILENAME = "FlightsRequest.json";
         String json = TextFileReader.readAll(JSON_FILENAME);
         FlightRequest fr = FlightRequestDeserializer.deserialize(json);
-        System.out.format("From: %s, To: %s", fr.from, fr.to);
+        fr.segments.forEach((s) -> System.out.format("%s -> %s\n", s.from, s.to));
     }
 }

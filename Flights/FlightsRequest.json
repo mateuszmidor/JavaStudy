@@ -1,4 +1,8 @@
 {
-  "from" : "ATH",
-  "to": "KTW"
+  "segments" :
+  [
+    {"from" : "ATH", "to": "KTW"},
+    {"from" : "JFK", "to": "MEX"},
+    {"from" : "BKK", "to": "MDL"}
+  ]
 }
