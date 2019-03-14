@@ -1,0 +1,90 @@
+{
+  "clientInformation": {
+    "partitionId": "AA",
+    "aaa": "HDQ",
+    "pcc": "KE0A",
+    "serviceName": "",
+    "txid": "",
+    "userId": "20",
+    "ownerId": "1S"
+  },
+
+  "connections":
+  [
+    {
+      "$connectionId": 1,
+      "segments":
+      [
+        {
+          "inlineDefinition":
+          {
+            "$instanceId": 1,
+            "departure":
+            {
+              "airport": "PHX",
+              "terminal": "",
+              "minuteOfDay": 300,
+              "equipment": { "code": "319", "bodyType": "W" }
+            },
+            "arrival":
+            {
+              "airport": "LAX",
+              "terminal": "",
+              "minuteOfDay": 400,
+              "equipment": { "code": "319", "bodyType": "W" },
+              "dayAdjustment": 0
+            },
+            "marketingFlight":
+            {
+              "carrier": "AA",
+              "flightNumber": 1702
+            },
+            "operatingFlight":
+            {
+              "carrier": "AA",
+              "flightNumber": 1702
+            },
+            "trackingStatus": "DD",
+            "codeshare": false,
+            "departureDate": "2019-12-20"
+          }
+        },
+        {
+          "inlineDefinition":
+          {
+            "$instanceId": 2,
+            "departure":
+            {
+              "airport": "LAX",
+              "terminal": "",
+              "minuteOfDay": 518,
+              "equipment": { "code": "319", "bodyType": "W" }
+            },
+            "arrival":
+            {
+              "airport": "IAH",
+              "terminal": "",
+              "minuteOfDay": 596,
+              "equipment": { "code": "319", "bodyType": "W" },
+              "dayAdjustment": 0
+            },
+            "marketingFlight":
+            {
+              "carrier": "AA",
+              "flightNumber": 1702
+            },
+            "operatingFlight":
+            {
+              "carrier": "AA",
+              "flightNumber": 1702
+            },
+            "trackingStatus": "DT",
+            "codeshare": false,
+            "departureDate": "2019-12-20"
+          }
+        }
+      ]
+    }
+  ]
+}
+

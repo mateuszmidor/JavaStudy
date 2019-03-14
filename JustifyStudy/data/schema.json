@@ -1,0 +1,332 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "MctCheckRq",
+  "properties": {
+    "clientInformation": {
+      "$ref": "#/definitions/clientInformation"
+    },
+    "segmentDefinitions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/segmentDefinition"
+      }
+    },
+    "connections": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/connection"
+      }
+    },
+    "additionalOptions": {
+      "$ref": "#/definitions/additionalOptions"
+    }
+  },
+  "required": [
+    "connections"
+  ],
+  "additionalProperties": false,
+  "definitions": {
+    "clientInformation": {
+      "type": "object",
+      "properties": {
+        "partitionId": {
+          "type": "string",
+          "pattern": "^([A-Z]{2})$"
+        },
+        "aaa": {
+          "type": "string",
+          "pattern": "^([A-Z]{3})$"
+        },
+        "pcc": {
+          "type": "string",
+          "pattern": "^([0-9A-Z]{4})$"
+        },
+        "serviceName": {
+          "type": "string"
+        },
+        "txid": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "ownerId": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "date": {
+      "type": "string",
+      "pattern": "^\\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$"
+    },
+    "minuteOfDay": {
+      "type": "integer",
+      "maximum": 1439,
+      "minimum": 0
+    },
+    "airport": {
+      "type": "string",
+      "pattern": "^(.{0}|[A-Z]{3,5})$"
+    },
+    "terminal": {
+      "type": "string",
+      "maxLength": 2,
+      "minLength": 0
+    },
+    "flight": {
+      "type": "object",
+      "properties": {
+        "carrier": {
+          "type": "string",
+          "pattern": "^( |[A-Z][A-Z0-9]{1,2}|[A-Z0-9][A-Z][A-Z0-9]?)$"
+        },
+        "flightNumber": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9999
+        }
+      },
+      "required": [
+        "carrier",
+        "flightNumber"
+      ],
+      "additionalProperties": false
+    },
+    "segmentId": {
+      "type": "integer",
+      "maximum": 32767,
+      "minimum": -32768
+    },
+    "trackingStatus": {
+      "type": "string",
+      "enum": [
+        "DD",
+        "DI",
+        "ID",
+        "II"
+      ]
+    },
+    "equipment": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "pattern": "^[A-Z0-9]{3}$"
+        },
+        "bodyType": {
+          "type": "string",
+          "enum": [
+            "N",
+            "W"
+          ]
+        }
+      },
+      "required": [
+        "code",
+        "bodyType"
+      ],
+      "additionalProperties": false
+    },
+    "departure": {
+      "type": "object",
+      "properties": {
+        "airport": {
+          "$ref": "#/definitions/airport"
+        },
+        "terminal": {
+          "$ref": "#/definitions/terminal"
+        },
+        "minuteOfDay": {
+          "$ref": "#/definitions/minuteOfDay"
+        },
+        "equipment": {
+          "$ref": "#/definitions/equipment"
+        }
+      },
+      "required": [
+        "airport",
+        "terminal",
+        "minuteOfDay",
+        "equipment"
+      ],
+      "additionalProperties": false
+    },
+    "arrival": {
+      "type": "object",
+      "properties": {
+        "airport": {
+          "$ref": "#/definitions/airport"
+        },
+        "terminal": {
+          "$ref": "#/definitions/terminal"
+        },
+        "minuteOfDay": {
+          "$ref": "#/definitions/minuteOfDay"
+        },
+        "equipment": {
+          "$ref": "#/definitions/equipment"
+        },
+        "dayAdjustment": {
+          "type": "integer",
+          "minimum": -1,
+          "maximum": 4
+        }
+      },
+      "required": [
+        "airport",
+        "terminal",
+        "minuteOfDay",
+        "dayAdjustment"
+      ],
+      "additionalProperties": false
+    },
+    "additionalOptions": {
+      "type": "object",
+      "additionalProperties": {
+        "type" : "string"
+      }
+    },
+    "systemDefinition": {
+      "type": "object",
+      "properties": {
+        "$instanceId": {
+          "type": "integer"
+        },
+        "departure": {
+          "$ref": "#/definitions/airport"
+        },
+        "arrival": {
+          "$ref": "#/definitions/airport"
+        },
+        "marketingFlight": {
+          "$ref": "#/definitions/flight"
+        },
+        "departureDate": {
+          "$ref": "#/definitions/date"
+        }
+      },
+      "required": [
+        "$instanceId",
+        "departure",
+        "arrival",
+        "marketingFlight",
+        "departureDate"
+      ],
+      "additionalProperties": false
+    },
+    "requestDefinition": {
+      "type": "object",
+      "properties": {
+        "$instanceId": {
+          "type": "integer"
+        },
+        "$segmentRef": {
+          "$ref": "#/definitions/segmentId"
+        },
+        "departureDate": {
+          "$ref": "#/definitions/date"
+        }
+      },
+      "required": [
+        "$instanceId",
+        "$segmentRef",
+        "departureDate"
+      ],
+      "additionalProperties": false
+    },
+    "inlineDefinition": {
+      "type": "object",
+      "properties": {
+        "$instanceId": {
+          "type": "integer"
+        },
+        "departure": {
+          "$ref": "#/definitions/departure"
+        },
+        "arrival": {
+          "$ref": "#/definitions/arrival"
+        },
+        "marketingFlight": {
+          "$ref": "#/definitions/flight"
+        },
+        "operatingFlight": {
+          "$ref": "#/definitions/flight"
+        },
+        "trackingStatus": {
+          "$ref": "#/definitions/trackingStatus"
+        },
+        "codeshare": {
+          "type": "boolean"
+        },
+        "departureDate": {
+          "$ref": "#/definitions/date"
+        }
+      },
+      "required": [
+        "$instanceId",
+        "departure",
+        "arrival",
+        "marketingFlight",
+        "trackingStatus",
+        "departureDate"
+      ],
+      "additionalProperties": false
+    },
+    "connection": {
+      "type": "object",
+      "properties": {
+        "$connectionId": {
+          "type": "integer"
+        },
+        "segments": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "systemDefinition": {
+                "$ref": "#/definitions/systemDefinition"
+              },
+              "requestDefinition": {
+                "$ref": "#/definitions/requestDefinition"
+              },
+              "inlineDefinition": {
+                "$ref": "#/definitions/inlineDefinition"
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "segmentDefinition": {
+      "type": "object",
+      "properties": {
+        "$segmentDefId": {
+          "$ref": "#/definitions/segmentId"
+        },
+        "departure": {
+          "$ref": "#/definitions/departure"
+        },
+        "arrival": {
+          "$ref": "#/definitions/arrival"
+        },
+        "marketingFlight": {
+          "$ref": "#/definitions/flight"
+        },
+        "operatingFlight": {
+          "$ref": "#/definitions/flight"
+        },
+        "trackingStatus": {
+          "$ref": "#/definitions/trackingStatus"
+        },
+        "codeshare": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

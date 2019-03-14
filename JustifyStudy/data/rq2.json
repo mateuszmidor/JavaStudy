@@ -1,0 +1,105 @@
+{
+  "clientInformation": {
+    "partitionId": "AA",
+    "aaa": "HDQ",
+    "pcc": "KE0A",
+    "serviceName": "",
+    "txid": "",
+    "userId": "AA",
+    "ownerId": "AA"
+  },
+
+  "segmentDefinitions": [
+    {
+      "$segmentDefId": 9001,
+      "departure": {
+        "airport": "KRK",
+        "terminal": "1A",
+        "minuteOfDay": 10,
+        "equipment": {
+          "code": "747",
+          "bodyType": "N"
+        }
+      },
+      "arrival": {
+        "airport": "WAW",
+        "terminal": "12",
+        "minuteOfDay": 70,
+        "equipment": {
+          "code": "747",
+          "bodyType": "N"
+        },
+        "dayAdjustment": 0
+      },
+      "marketingFlight": {
+        "carrier": "LH",
+        "flightNumber": 1234
+      },
+      "operatingFlight": {
+        "carrier": "LO",
+        "flightNumber": 2345
+      },
+      "trackingStatus": "DD",
+      "codeshare": true
+    },
+    {
+      "$segmentDefId": 9002,
+      "departure": {
+        "airport": "WAW",
+        "terminal": "1A",
+        "minuteOfDay": 120,
+        "equipment": {
+          "code": "747",
+          "bodyType": "N"
+        }
+      },
+      "arrival": {
+        "airport": "GDA",
+        "terminal": "12",
+        "minuteOfDay": 150,
+        "equipment": {
+          "code": "747",
+          "bodyType": "N"
+        },
+        "dayAdjustment": 0
+      },
+      "marketingFlight": {
+        "carrier": "LH",
+        "flightNumber": 1234
+      },
+      "operatingFlight": {
+        "carrier": "LO",
+        "flightNumber": 2345
+      },
+      "trackingStatus": "DD",
+      "codeshare": true
+    }
+  ],
+
+  "connections":
+  [
+    {
+      "$connectionId": 1,
+      "segments":
+      [
+        {
+          "requestDefinition":
+          {
+
+            "$segmentRef": 9001,
+            "departureDate": "2019-12-20"
+          }
+        },
+        {
+          "requestDefinition":
+          {
+            "$instanceId": 2,
+            "$segmentRef": 9002,
+            "departureDate": "2019-12-20"
+          }
+        }
+      ]
+    }
+  ]
+}
+

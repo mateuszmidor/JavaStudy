@@ -1,0 +1,116 @@
+{
+  "clientInformation": {
+    "partitionId": "AA",
+    "aaa": "HDQ",
+    "pcc": "KE0A",
+    "serviceName": "",
+    "txid": "",
+    "userId": "AA",
+    "ownerId": "AA"
+  },
+  "connections":
+  [
+    {
+      "$connectionId": 11,
+      "segments":
+      [
+        {
+          "systemDefinition":
+          {
+            "$instanceId": 1,
+            "departure": "BUR",
+            "arrival": "PHX",
+            "marketingFlight":
+            {
+              "carrier": "AA",
+              "flightNumber": 5835
+            },
+            "departureDate": "2019-12-20"
+          }
+        },
+        {
+          "systemDefinition":
+          {
+            "$instanceId": 2,
+            "departure": "PHX",
+            "arrival": "LAX",
+            "marketingFlight":
+            {
+              "carrier": "AA",
+              "flightNumber": 1702
+            },
+            "departureDate": "2019-12-20"
+          }
+        }
+      ]
+    },
+    {
+      "$connectionId": 22,
+      "segments":
+      [
+        {
+          "systemDefinition":
+          {
+            "$instanceId": 3,
+            "departure": "BUR",
+            "arrival": "PHX",
+            "marketingFlight":
+            {
+              "carrier": "AA",
+              "flightNumber": 5835
+            },
+            "departureDate": "2019-12-26"
+          }
+        },
+        {
+          "systemDefinition":
+          {
+            "$instanceId": 4,
+            "departure": "PHX",
+            "arrival": "LAX",
+            "marketingFlight":
+            {
+              "carrier": "AA",
+              "flightNumber": 1702
+            },
+            "departureDate": "2019-12-26"
+          }
+        }
+      ]
+    },
+    {
+      "$connectionId": 44,
+      "segments":
+      [
+        {
+          "systemDefinition":
+          {
+            "$instanceId": 5,
+            "departure": "BUR",
+            "arrival": "PHX",
+            "marketingFlight":
+            {
+              "carrier": "AA",
+              "flightNumber": 5835
+            },
+            "departureDate": "2019-12-25"
+          }
+        },
+        {
+          "systemDefinition":
+          {
+            "$instanceId": 6,
+            "departure": "PHX",
+            "arrival": "LAX",
+            "marketingFlight":
+            {
+              "carrier": "AA",
+              "flightNumber": true
+            },
+            "departureDate": "2019-12-24"
+          }
+        }
+      ]
+    }
+  ]
+}
